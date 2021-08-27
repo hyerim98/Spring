@@ -1,0 +1,22 @@
+방명록 테이블
+
+--시퀀스
+create sequence seq_visit_idx;
+
+--테이블
+create table visit(
+	idx NUMBER(3) primary key,
+	name VARCHAR2(100) not null, --작성자
+	content VARCHAR2(2000) not null, --내용
+	pwd VARCHAR2(100) not null, --비밀번호
+	ip VARCHAR2(50), --ip
+	regdate DATE
+);
+
+--샘플데이터
+insert into visit values(seq_visit_idx.nextval, '일길동', '반갑습니다', '1111', '1.1.1.1', sysdate);
+insert into visit values(seq_visit_idx.nextval, '이길동', '안녕하세요', '2222', '2.2.2.2', sysdate);
+commit;
+
+--방명록 조회
+select * from visit order by idx DESC;

@@ -1,0 +1,11 @@
+[file upload를 위한 라이브러리 다운]
+http://mvnrepository.com/ -> fileupload 검색 -> Apache Commoms FileUpload 클릭 -> 1.3.1 버전 복사 후 pom.xml에 붙여넣기
+
+			  io 검색 -> Apache Commons IO 클릭 -> 2.4 버전 복사 후 pom.xml에 붙여넣기
+
+[파일을 받기 위한 클래스]
+jsp : MultiPartRequest
+spring : MultipartFile
+
+[front쪽 img 저장]
+src -> webapp -> resources
