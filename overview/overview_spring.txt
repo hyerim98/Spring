@@ -1,0 +1,149 @@
+<spring>
+
+tomcat이 잡혀있지 않으면 spring은 설치가 안된다
+
+apache-tomact -> conf -> server.xml -> 메모장으로 열기 -> <Connector port="9090" protocol="HTTP/1.1"   이렇게 port를 9090으로 바꾸기
+              						connectionTimeout="20000"
+               						redirectPort="8443" />
+						port번호가 같기 때문에 jsp, spring의 eclipse를 동시에 실행하면 충돌이 발생하여 오류가 난다
+		webapps -> examples -> WEB-INF -> lib -> 라이브러리 2개 복사(if,for문 사용하기 위한 라이브러리)
+apache-tomcat -> lib -> 라이브러리 붙여넣기
+
+
+
+[eclipse 환경설정]
+window -> preference -> General -> Workspace -> UTF-8로 변경 -> Apply
+		         	           Web Browser -> external , chrome -> Apply
+		         Server -> Runtime environment -> Add -> tomcat 8.5 -> tomcat 폴더 잡기 -> finish
+		         Web -> CSS Files -> UTF-8로 변경 -> Apply
+			       HTML Files -> UTF-8로 변경 -> Apply
+			       JSP Files -> UTF-8로 변경 -> Apply and Close
+
+[spring 설정]
+Help -> Eclipse Marketplace -> spring sts검색 -> Spring Tools 3  3.9.14 Release 설치 -> confirm -> accept -> restart Now
+spring설치되었는지 확인하는 법 : eclipse 맨 위에 나뭇잎 모양이 있는지 확인
+
+[spring project]
+file -> new -> other -> Spring -> Spring Legacy Project -> next -> project name 입력 -> Spring MVC Project -> next -> yes -> package명 입력(com.korea.test처럼 반드시 3단계이상으로 작성해야함) -> finish -> 다운이 다 받아졌으면 project에 오류가 나지 않는다
+
+
+[spring 외부에 있는 파일 가져오기]
+file -> import -> General -> Existing projects into workspace -> Browse -> finish
+[외부에서 파일을 가져왔는데 로딩 후에도 오류가 발생할 시]
+프로젝트 우측클릭 -> Maven -> Update Project : 비추천
+C드라이브 -> 사용자 -> ITSC(PC이름) -> .m2(spring에서 라이브러리를 다운받으면 생성되는 폴더) -> eclipse를 끄고 m2를 삭제 후 eclipse를 다시 열기(라이브러리를 다시 불러오는 작업)
+
+[spring project 실행 방법]
+project에서 우측 클릭 -> Run As -> Run on Server -> finish  ==> 웹 브러우저에 Hello World가 나와야 spring 준비가 완료된 것
+[Hello World가 실행되는 곳]
+src -> main -> webapp -> WEB-INF -> view -> home.jsp
+
+[실행 순서]
+run on server(이렇게 호출해야 web.xml을 거쳐서 간다) -> web.xml -> root-context.xml(spring에서 사용 할 객체를 생성하는 영역 : New로 만드는 것들) -> servletContext.xml(controller를 만드는 영역) -> controller -> return되는 jsp가 실행됨(home.jsp)
+
+
+[spring class만들기]
+java Resources -> src/main/java 우측클릭 ->  class 생성
+
+[spring jsp만들기] : ctrl + F11로 실행
+src -> webapp 우측클릭 -> new -> jsp File 생성
+
+[spring forwarding 받은 jsp 만들기] : run on server로 실행
+src -> webapp -> views 우측클릭 -> new -> jsp File 생성
+
+[spring 방식으로 객체생성]
+src -> main -> webapp -> WEB-INF -> web.xml -> source -> /WEB-INF/spring/root-context.xml 여기로 들어가 본다 -> root-context.xml(spring에서 사용 할 객체를 생성하는 영역 : New로 만드는 것들)
+
+[spring controller만들기] => jsp의 servlet역할
+src/main/java 우측클릭 ->  class 생성 -> class  어노테이션(@Controller) 하기
+
+[spring controller 자동 생성(객체화하기)]
+src -> main -> webapp -> WEB-INF -> spring -> appServlet -> servlet-context.xml에서 자동 생성을 하면 Injection을 사용할 수 없다
+						      Controller 자동생성 : <context:component-scan base-package="com.korea.test_di, controller" /> 이 부분에 Controller가 존재하는 패키지 추가
+						      Controller 수동생성 : <beans:bean class="controller.BoardController">
+							<beans:property name="service" ref="serviceBean"/> <!-- root-context에 있는 객체를 servlet-context까지 가져오는 작업 --></beans:bean>
+
+
+
+[spring Front 쪽 참조파일 넣는 곳] -- css파일 같은 것
+src -> main -> webapp -> resources에 저장해야 함
+[spring에서 webapp 폴더까지의 경로]
+${ pageContext.request.contextPath }
+
+[spring Back(JAVA) 쪽 참조파일 넣는 곳]
+src -> java Resources -> src/main/resources
+								        
+[spring 한글 깨짐 방지]
+web.xml로 가서 설정
+<!-- 앞으로 url mapping의 확장자가 do로 끝나는 모든 메서드는 인코딩 필터를 거쳐 utf-8로 변환  -->
+	<filter>
+		<filter-name>encodingFilter</filter-name> <!-- encoding 이름 -->
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name> <!-- 위에 만들어 놓은 것을 참조  -->
+		<url-pattern>*.do</url-pattern> <!-- 확장자가 .do로 끝나는 것 utf-8로 변환 -->
+	</filter-mapping>
+
+[생성자]
+우측클릭 -> Source -> Generate Constructor Using Fields
+
+[CTRL + F]
+Find -> Replace with
+Replace All 클릭
+
+
+[Auto-Detecting(자동생성)]
+모든 class는 @Repository를 해당 class위에 붙이면 bean에서 객체를 생성하지 않아도 자동으로 class가 객체화됨 생성됨
+
+- Component
+  @Repository , @Controller , @Service
+
+<!-- Component를 가지고 있는 패키지 자동생성 -->
+<context:component-scan base-package="dao, controller" />
+
+@Autowired
+bean으로 객체를 못 만드니 setter&constructor Injection을 사용하지 못한다
+해당 변수가 객체화가 되게 위하여 Autowired를 붙인다
+
+
+[open API]
+daum,naver,google에서 데이터를 요청하면 json형식으로 Ajax로 반환
+<제공해주는 api> 원래는 회원가입,키를 받아야 사용할 수 있다
+영화진흥위원회 api 검색(JSON형식으로 데이터를 돌려줌) -> 제공서비스 -> 맨 밑 응답예시 json쪽 복사(URL)
+
+
+<spring>
+중간에 한글 경로가 있으면 오류가 난다 , USB로 바로 다이렉트로 작업하면 오류 남
+기본이 Model2이다
+spring : 프레임워크(모듈 : 부품) , jsp확장판
+    EX)로그인을 하기위한 부품 , 회원가입을 하기위한 부품
+
+EJB의 90%이상의 기능을 사용할 수 있다 오픈소스라서 서버,제작비용이 들지 않는다(호스트받을 때만 비용이 조금 든다)
+Servlet을 사용하지 않는다 -> 실제로 사용하는 class도 줄어든다
+
+JSP 코드 39줄 -> Spring 코드 29줄로 줄어든다
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
