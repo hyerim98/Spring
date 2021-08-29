@@ -27,8 +27,9 @@
 * @Autowired   
    * 자동주입(자동연결,자동Injection)   
    * spring의 4개 영역을 객체 생성없이 가져와 사용할 수 있도록 처리(request, session 등)
-   * 따로 new를 작성하지 않아도 객체 사용이 가능하다  
-controller와 dao가 servlet-context.xml에서 이렇게 자동생성이 되려면, dao와 controller가 Component를 가지고있는 Annotaion이 선언되어 있어야한다 
+   * 따로 new를 작성하지 않아도 객체 사용이 가능하다   
+  
+ controller와 dao가 servlet-context.xml에서 이렇게 자동생성이 되려면, dao와 controller가 Component를 가지고있는 Annotaion이 선언되어 있어야한다 
  ```
    <!-- Component를 가지고 있는 패키지 자동생성 -->
    <!-- 자동생성은 따로 코드를 작성하지 않아도 Autowired를 자동으로 사용할 수 있다 -->
