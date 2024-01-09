@@ -2,7 +2,10 @@ package com.example.springbasic.discount;
 
 import com.example.springbasic.member.Grade;
 import com.example.springbasic.member.Member;
+import org.springframework.stereotype.Component;
 
+// 자동으로 빈 등록을 위한 어노테이션
+@Component
 public class RateDiscountPolicy implements DiscountPolicy{
     private int discountPercent = 10;
     @Override
