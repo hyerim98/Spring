@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// 회원 서비스 테스트
 public class MemberServiceTest {
     MemberService memberService;
 

@@ -10,6 +10,7 @@ import com.example.springbasic.order.OrderServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+// 주문 서비스 테스트(order)
 public class OrderApp {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);

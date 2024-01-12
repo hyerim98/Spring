@@ -7,6 +7,8 @@ import com.example.springbasic.member.MemberServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+// 회원 저장, 조회 테스트(member)
+
 public class MemberApp {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);

@@ -3,6 +3,8 @@ package com.example.springbasic.discount;
 import com.example.springbasic.member.Grade;
 import com.example.springbasic.member.Member;
 
+// 할인 정책 인터페이스를 구현한 고정 할인 구현 클래스
+
 public class FixDiscountPolicy implements DiscountPolicy {
 
     // 1000원 할인

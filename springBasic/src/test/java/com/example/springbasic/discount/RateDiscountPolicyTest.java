@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// 할인 정책 테스트
 class RateDiscountPolicyTest {
     RateDiscountPolicy rateDiscountPolicy = new RateDiscountPolicy();
 
