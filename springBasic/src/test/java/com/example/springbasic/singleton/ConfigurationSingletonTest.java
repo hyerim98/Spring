@@ -11,6 +11,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// 싱글톤 컨테이너 테스트
+// memberRepository 주소가 다 같음 -> 호출할 때마다 새로운 객체를 생성해서 주는 것이 아님
+
 public class ConfigurationSingletonTest {
     @Test
     void configurationTest() {

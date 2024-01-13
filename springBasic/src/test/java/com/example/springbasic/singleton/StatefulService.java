@@ -1,6 +1,6 @@
 package com.example.springbasic.singleton;
 
-// stateful 설계
+// stateful(상태유지) 설계
 public class StatefulService {
     private int price; // 상태를 유지하는 필드 10000 -> 20000
 

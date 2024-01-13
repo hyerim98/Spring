@@ -1,6 +1,6 @@
 package com.example.springbasic.singleton;
 
-// stateless 설계
+// stateless(무상태) 설계
 public class StatelessService {
 
     public int order(String name, int price) {

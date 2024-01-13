@@ -13,6 +13,7 @@ class StatefulServiceTest {
     @Test
     void statefulServiceSingleton() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
+        // statefulService1 == statefulService2 (싱글톤 컨테이너로 인하여 2개의 객체가 같음 -> 상태를 유지하는 필드가 있으면 위험)
         StatefulService statefulService1 = ac.getBean(StatefulService.class);
         StatefulService statefulService2 = ac.getBean(StatefulService.class);
 
@@ -32,13 +33,14 @@ class StatefulServiceTest {
     @Test
     void statelessServiceSingleton() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
-        StatelessService statefulService1 = ac.getBean(StatelessService.class);
-        StatelessService statefulService2 = ac.getBean(StatelessService.class);
+        // statefulService1 == statefulService2 (싱글톤 컨테이너로 인해 2개의 객체가 같지만, 상태를 유지하는 필드가 없기 때문에 안전)
+        StatelessService statelessService1 = ac.getBean(StatelessService.class);
+        StatelessService statelessService2 = ac.getBean(StatelessService.class);
 
         // ThreadA : A사용자 10000원 주문
-        int userAPrice = statefulService1.order("userA", 10000);
+        int userAPrice = statelessService1.order("userA", 10000);
         // ThreadB : B사용자 20000원 주문
-        int userBPrice = statefulService2.order("userB", 20000);
+        int userBPrice = statelessService2.order("userB", 20000);
         System.out.println("userAPrice = " + userAPrice);
 
         assertThat(userAPrice).isEqualTo(10000);
@@ -46,6 +48,10 @@ class StatefulServiceTest {
     }
 
     static class TestConfig {
+        @Bean
+        public StatefulService statefulService() {
+            return new StatefulService();
+        }
         @Bean
         public StatelessService statelessService() {
             return new StatelessService();
