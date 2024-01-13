@@ -11,6 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+// 컴포넌트 스캔 시 포함 할, 제외 할 class 설정하여 테스트 진행
+// 보통 필터 많이 사용하지 않음, includeFilters는 더더욱 사용하지 않음 excludeFilters는 아주 가끔 사용됨
 
 public class ComponentFilterAppConfigTest {
     @Test
@@ -21,13 +25,13 @@ public class ComponentFilterAppConfigTest {
         assertThat(beanA).isNotNull();
 
         // 컴포넌트 스캔 제외시켰으므로 BeanB는 존재하지 않음
-        org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> ac.getBean("beanB", BeanB.class));
+        assertThrows(NoSuchBeanDefinitionException.class, () -> ac.getBean("beanB", BeanB.class));
     }
 
     @Configuration
     @ComponentScan(
-        includeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
-            excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class)
+        includeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class), // 스캔 포함
+            excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class) // 스캔 불포함
     )
     static class ComponentFilterAppConfig {
 
