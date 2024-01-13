@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ApplicationContextExtendsFindTest {
     // 스프링 컨테이너 생성
-    // 생성한 컨테이너에다 AppConfig.class 삽입
+    // 생성한 컨테이너에다 TestConfig.class 삽입
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
 
 
@@ -56,7 +56,7 @@ public class ApplicationContextExtendsFindTest {
     }
 
     @Test
-    @DisplayName("보모 타입으로 모두 조회하기 - Object")
+    @DisplayName("부모 타입으로 모두 조회하기 - Object")
     void findAllBeanByObjectType() {
         Map<String, Object> beansOfType = ac.getBeansOfType(Object.class);
         for(String key : beansOfType.keySet()) {
@@ -66,7 +66,7 @@ public class ApplicationContextExtendsFindTest {
 
     @Configuration
     static class TestConfig {
-        // 추상에 의존해야 함(구현 클래스에 의존하면 안됨)
+        // 추상(인터페이스)에 의존해야 함(구현 클래스에 의존하면 안됨)
         // DiscountPolicy(추상), RateDiscountPolicy(구현)
         @Bean
         public DiscountPolicy rateDiscountPolicy() {

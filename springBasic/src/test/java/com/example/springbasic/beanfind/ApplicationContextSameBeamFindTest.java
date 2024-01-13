@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ApplicationContextSameBeamFindTest {
     // 스프링 컨테이너 생성
-    // 생성한 컨테이너에다 AppConfig.class 삽입
+    // 생성한 컨테이너에다 SameBeanConfig.class 삽입
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class);
 
     @Test
@@ -50,6 +50,7 @@ public class ApplicationContextSameBeamFindTest {
 
     @Configuration
     static class SameBeanConfig {
+        // 타입으로 조회 시 같은 타입이 둘 이상 있으면, 중복 오류가 발생하는 테스트를 위하여 이름만 다르게 생성
         @Bean
         public MemberRepository memberRepository1() {
             return new MemoryMemberRepository();
