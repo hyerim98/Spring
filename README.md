@@ -1,5 +1,4 @@
-# Spring
-
+# SpringBasic
 ## src 설명
 * **AppConfig.java**
   * 스프링 컨테이너 생성
@@ -29,3 +28,5 @@ Assertions.assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
 Assertions.assertThrows(NoSuchBeanDefinitionException.class,
                 () -> ac.getBean("xxxxx", MemberService.class));
 ```
+
+# SpringMVC
