@@ -28,10 +28,7 @@ Assertions.assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
 Assertions.assertThrows(NoSuchBeanDefinitionException.class,
                 () -> ac.getBean("xxxxx", MemberService.class));
 ```
-
-
-
-
+<br/><br/>
 # SpringMVC
 ## Servlet
 * **com.example.servlet.basic.request**
