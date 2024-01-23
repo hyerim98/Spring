@@ -29,4 +29,13 @@ Assertions.assertThrows(NoSuchBeanDefinitionException.class,
                 () -> ac.getBean("xxxxx", MemberService.class));
 ```
 
+
 # SpringMVC
+## Servlet
+* **com.example.servlet.basic.request**
+  * request header 정보
+  * request parameter 조회하는 방법들
+  * request message body 조회하는 방법(string 타입, json 타입)
+* **com.example.servlet.basic.response**
+  * response header 설정
+  * response html 형식, json 형식
