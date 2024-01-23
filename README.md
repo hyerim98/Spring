@@ -31,6 +31,7 @@ Assertions.assertThrows(NoSuchBeanDefinitionException.class,
 <br/><br/>
 # SpringMVC
 ## Servlet
+* [Servlet](http://localhost:9090/basic.html)
 * **com.example.servlet.basic.request**
   * request header 정보
   * request parameter 조회하는 방법들
@@ -38,3 +39,39 @@ Assertions.assertThrows(NoSuchBeanDefinitionException.class,
 * **com.example.servlet.basic.response**
   * response header 설정
   * response html 형식, json 형식
+
+## Servlet MVC
+* [Servlet MVC](http://localhost:9090/index.html)
+* **com.example.servlet.web.servlet**
+  ```
+  // 응답
+
+  response.setContentType("text/html");
+  response.setCharacterEncoding("utf-8");
+
+  PrintWriter w = response.getWriter();
+  w.write("<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                " <meta charset=\"UTF-8\">\n" +
+                " <title>Title</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<form action=\"/servlet/members/save\" method=\"post\">\n" +
+                " username: <input type=\"text\" name=\"username\" />\n" +
+                " age: <input type=\"text\" name=\"age\" />\n" +
+                " <button type=\"submit\">전송</button>\n" +
+                "</form>\n" +
+                "</body>\n" +
+                "</html>\n");
+  ```
+* **com.example.servlet.web.servletmvc**
+  ```
+  // 응답
+  
+  String viewPath = "/WEB-INF/views/new-form.jsp";
+  // controller -> view로 이동할 때 사용
+  RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
+  // 다른 서블릿이나 JSP로 이동할 수 있는 기능이다. 서버 내부에서 다시 호출이 발생한다.
+  dispatcher.forward(request, response);
+  ```
