@@ -97,10 +97,10 @@ Assertions.assertThrows(NoSuchBeanDefinitionException.class,
 * [Spring MVC 구조](http://localhost:9090/index.html)
 * **com.example.servlet.web.springmvc.**
   * old
-   *  org.springframework.web.servlet.mvc.Controller, HttpRequestHandler
+    *  org.springframework.web.servlet.mvc.Controller, HttpRequestHandler
   * v1
-   * org.springframework.stereotype.Controller, @RequestMapping
+    * org.springframework.stereotype.Controller, @RequestMapping
   * v2
-   * v1에서 컨트롤러 통합
+    * v1에서 컨트롤러 통합
   * v3
-   * v2 + @GetMapping + - Model 파라미터 + ViewName 직접 반환 + @RequestParam 사용
+    * v2 + @GetMapping + - Model 파라미터 + ViewName 직접 반환 + @RequestParam 사용
