@@ -92,3 +92,15 @@ Assertions.assertThrows(NoSuchBeanDefinitionException.class,
  * v5: 유연한 컨트롤러
    * 어댑터 도입
    * 어댑터를 추가해서 프레임워크를 유연하고 확장성 있게 설계
+
+## Spring MVC - 구조 이해
+* [Spring MVC 구조](http://localhost:9090/index.html)
+* **com.example.servlet.web.springmvc.**
+  * old
+   *  org.springframework.web.servlet.mvc.Controller, HttpRequestHandler
+  * v1
+   * org.springframework.stereotype.Controller, @RequestMapping
+  * v2
+   * v1에서 컨트롤러 통합
+  * v3
+   * v2 + @GetMapping + - Model 파라미터 + ViewName 직접 반환 + @RequestParam 사용
