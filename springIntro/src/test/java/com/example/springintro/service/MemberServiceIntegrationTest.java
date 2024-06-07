@@ -1,32 +1,26 @@
 package com.example.springintro.service;
 
 import com.example.springintro.domain.Member;
+import com.example.springintro.repository.MemberRepository;
 import com.example.springintro.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// 자바 테스트
+// 스프링 통합 테스트
 
-class MemberServiceTest {
+@SpringBootTest // 스프링 컨테이너와 테스트를 함께 실행
+@Transactional // 테스트가 끝나면 rollback -> 즉, DB에 반영 안됨
+class MemberServiceIntegrationTest {
 
-    MemberService memberService;
-    MemoryMemberRepository memoryMemberRepository;
-
-    // 각 테스트 실행 전마다 실행하는 로직
-    @BeforeEach
-    public void setUp() { // 테스트가 서로 영향이 없도록 항상 새로운 객체를 생성하고, 의존관계도 새로 맺어준다
-        memoryMemberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memoryMemberRepository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memoryMemberRepository.clearStore();
-    }
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
     @Test
     void 회원가입() {
@@ -54,19 +48,5 @@ class MemberServiceTest {
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
         Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
-        /*try {
-            memberService.join(member2);
-            fail();
-        } catch (IllegalStateException e) {
-            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
-        }*/
-    }
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }

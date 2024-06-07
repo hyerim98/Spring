@@ -3,12 +3,14 @@ package com.example.springintro.service;
 import com.example.springintro.domain.Member;
 import com.example.springintro.repository.MemberRepository;
 import com.example.springintro.repository.MemoryMemberRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional // JPA를 사용하기 위하여 서비스 계층애 트랜잭션이 필요
 //@Service
 public class MemberService {
 
