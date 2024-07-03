@@ -48,6 +48,7 @@ public class ApplicationContextSameBeamFindTest {
         assertThat(beansOfType.size()).isEqualTo(2);
     }
 
+    // 클래스안의 static은 해당 class안에서만 사용하겠다는 의미
     @Configuration
     static class SameBeanConfig {
         // 타입으로 조회 시 같은 타입이 둘 이상 있으면, 중복 오류가 발생하는 테스트를 위하여 이름만 다르게 생성
