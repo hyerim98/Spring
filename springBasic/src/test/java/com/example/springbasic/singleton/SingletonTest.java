@@ -37,8 +37,11 @@ public class SingletonTest {
 
         // same : == (인스턴스 참조 값 비교)
         assertThat(singletonService1).isSameAs(singletonService2);
+
+        SingletonService.getInstance().logic();
     }
 
+    // 스프링 빈이 싱글톤이 되도록 보장
     @Test
     @DisplayName("스프링 컨테이너와 싱글톤")
     void springContainer() {
