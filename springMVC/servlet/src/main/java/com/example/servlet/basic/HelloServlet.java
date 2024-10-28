@@ -15,10 +15,10 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("HelloServlet.service");
-        System.out.println("request = " + request);
-        System.out.println("response = " + response);
+        System.out.println("request = " + request); // HTTP 요청 메시지
+        System.out.println("response = " + response); // 응답 객체
 
-        String username = request.getParameter("username");
+        String username = request.getParameter("username"); // 쿼리 파라미터 가져오기
         System.out.println("username = " + username);
 
         // 웹 브라우저에 응답하는 response-http 응답 메세지에 해당 데이터가 담겨져 간다(개발자 도구에서 확인 F12)
