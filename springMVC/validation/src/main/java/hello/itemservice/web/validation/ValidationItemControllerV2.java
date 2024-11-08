@@ -31,6 +31,7 @@ public class ValidationItemControllerV2 {
     private final ItemValidator itemValidator;
 
     // 컨트롤러가 요청 될 때 마다 항상 해당 검증기 적용
+    // addItemV6()
     @InitBinder
     public void init(WebDataBinder dataBinder) {
         dataBinder.addValidators(itemValidator);
