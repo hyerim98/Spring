@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:object="${form}" th:method="post">
+    number <input type="text" th:field="*{number}"><br/> <!--th:field : 컨버팅 적용(ToString)-->
+    localDateTime <input type="text" th:field="*{localDateTime}"><br/> <!--th:field : 컨버팅 적용(ToString)-->
+    <input type="submit"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>${number}: <span th:text="${number}" ></span></li> <!--${...} : 변수 표현식-->
+    <li>${{number}}: <span th:text="${{number}}" ></span></li> <!--${{...}} : 컨버전 서비스 적용(ToString)-->
+    <li>${ipPort}: <span th:text="${ipPort}" ></span></li> <!--${...} : 변수 표현식-->
+    <li>${{ipPort}}: <span th:text="${{ipPort}}" ></span></li> <!--${{...}} : 컨버전 서비스 적용(ToString)-->
+</ul>
+
+</body>
+</html>

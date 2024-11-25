@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    <li>${form.number}: <span th:text="${form.number}" ></span></li>
+    <li>${{form.number}}: <span th:text="${{form.number}}" ></span></li> <!--${{...}} : 컨버전 서비스 적용(ToString)-->
+    <li>${form.localDateTime}: <span th:text="${form.localDateTime}" ></span></li>
+    <li>${{form.localDateTime}}: <span th:text="${{form.localDateTime}}" ></span></li> <!--${{...}} : 컨버전 서비스 적용(ToString)-->
+</ul>
+
+</body>
+</html>

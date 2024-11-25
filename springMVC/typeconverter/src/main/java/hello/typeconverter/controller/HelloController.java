@@ -1,0 +1,32 @@
+package hello.typeconverter.controller;
+
+import hello.typeconverter.type.IpPort;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @GetMapping("/hello-v1")
+    public String helloV1(HttpServletRequest request) {
+        // http://localhost:9090/hello-v1?data=10 -> 문자 10이 전달됨
+        String data = request.getParameter("data"); // 문자 타입 조회
+        Integer intValue = Integer.valueOf(data); // 숫자 타입으로 변경
+        System.out.println("intValue = " + intValue);
+        return "ok";
+    }
+
+    @GetMapping("/hello-v2") // "10,000"
+    public String helloV2(@RequestParam Integer data) { // @RequestParam : 문자를 숫자로 변경해줌
+        System.out.println("data = " + data);
+        return "ok";
+    }
+
+    @GetMapping("/ip-port")
+    public String ipPort(@RequestParam IpPort ipPort) {
+        System.out.println("ip = " + ipPort.getIp());
+        System.out.println("port = " + ipPort.getPort());
+        return "ok";
+    }
+}
