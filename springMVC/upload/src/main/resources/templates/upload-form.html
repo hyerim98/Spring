@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>상품 등록 폼</h2>
+    </div>
+
+    <h4 class="mb-3">상품 입력</h4>
+
+    <form th:action method="post" enctype="multipart/form-data" id="uploadFile">
+        <ul>
+            <li>상품명<input type="text" name="itemName"></li>
+            <li>파일<input type="file" name="file"></li>
+        </ul>
+        <button th:type="button" id="uploadBtn">제출</button>
+        <!--<input type="submit"/>-->
+    </form>
+
+</div> <!-- /container -->
+</body>
+
+<script>
+    $(function () {
+        $('#uploadBtn').on('click', function () {
+            uploadFile();
+        })
+    });
+
+    function uploadFile() {
+        let form = $('#uploadFile')[0];
+        let formData = new FormData(form);
+
+        $.ajax({
+            type:"post",
+            enctype:'multipart/form-data',
+            url:'/servlet/v2/upload',
+            data:formData,
+            //dataType:'json',
+            processData:false,
+            contentType:false,
+            cache:false,
+            success:function(data){
+                alert("success : " + data);
+                return;
+            },
+            error:function(e){
+                alert("error : " + e);
+            }
+        });
+    }
+</script>
+
+</html>
