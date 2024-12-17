@@ -1,6 +1,6 @@
 package hello.itemservicedb;
 
-import hello.itemservicedb.config.MyBatisConfig;
+import hello.itemservicedb.config.SpringDataJpaConfig;
 import hello.itemservicedb.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,9 @@ import org.springframework.context.annotation.Profile;
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV3Config.class)
-@Import(MyBatisConfig.class)
+//@Import(MyBatisConfig.class)
+//@Import(JpaConfig.class)
+@Import(SpringDataJpaConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservicedb.web") // 컨트롤러 부분만 컴포넌트 스캔, 나머지는 직접 수동으로 등록
 public class ItemserviceDbApplication {
 
