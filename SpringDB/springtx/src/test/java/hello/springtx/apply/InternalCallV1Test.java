@@ -48,7 +48,6 @@ public class InternalCallV1Test {
 
         @Transactional
         public void internal() {
-            log.info("call internal");
             printTxInfo();
         }
 

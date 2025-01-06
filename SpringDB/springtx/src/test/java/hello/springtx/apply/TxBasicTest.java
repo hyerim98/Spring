@@ -24,6 +24,7 @@ public class TxBasicTest {
     @Test
     void proxyCheck() {
         log.info("aop class = {}", basicService.getClass());
+        // 선언적 트랜잭션 방식에서 스프링 트랜잭션은 AOP를 기반으로 동작
         assertThat(AopUtils.isAopProxy(basicService)).isTrue();
     }
 
@@ -44,17 +45,18 @@ public class TxBasicTest {
     @Slf4j
     static class BasicService {
 
+        // @Transactional을 메서드나 클래스에 붙이면 해당 객체는 트랜잭션 AOP 적용의 대상이 되고, 결과적으로 실제 객체 대신에 트랜잭션을 처리해주는 프록시 객체가 스프링 빈에 등록 됨
         @Transactional // 트랜잭션 AOP는 프록시를 만들어서 스프링 컨테이너에 등록함(실제 객체 대신에 트랜잭션을 처리해주는 프록시 객체가 스프링 빈에 등록 됨)
         public void tx() {
             log.info("call tx");
-            // 트랜잭션 적용 여부
+            // 트랜잭션 적용 여부 확인
             boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
             log.info("tx active = {}", txActive);
         }
 
         public void nonTx() {
             log.info("call nonTx");
-            // 트랜잭션 적용 여부
+            // 트랜잭션 적용 여부 확인
             boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
             log.info("nonTx active = {}", txActive);
         }
