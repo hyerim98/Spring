@@ -1,0 +1,89 @@
+< root-context.xml, servlet-context.xml 경로가 복잡하므로 변경 >
+
+config.zip 압축풀기 -> config 복사
+ java Resources -> src/main/resources에 config 붙여넣기
+ java Resources -> src/main/resources에 패키지(config.spring.context) 생성
+root-context.xml 복사 -> 생성 한 패키지(config.spring.context)에다 붙여넣기
+
+[web.xml]
+경로를 옮긴 root-context.xml의  경로를 찾는다
+<param-value>classpath*:config/spring/context/context-*.xml</param-value> 
+
+src -> java Resources -> src/main/resources에 패키지(config.spring.mvc) 생성
+servlet-context.xml 복사 -> 생성 한 패키지(config.spring.mvc)에다 붙여넣기
+
+[web.xml]
+경로를 옮긴 servlet-context.xml의  경로를 찾는다
+<param-value>classpath:config/spring/mvc/servlet-context.xml</param-value>
+
+<DB연결>
+c: -> oraclexe -> app -> oracle -> product -> 11.2.0 -> server -> jdbc -> lib -> ojdbc6.jar 복사
+spring_1202 -> util -> tomcat -> lib -> 붙여넣기
+
+[config-mybatis]
+db.properties -> user=test
+	          password=1111  로 바꾸기		==> jsp의 JNDI역할
+
+mybatis-config.xml 				==> jsp의 mapper역할
+
+[context-1-datasources.xml]
+Namespace -> context 체크
+//해당 DB로 설정하겠다
+<context:property-placeholder location="classpath:config/mybatis/db.properties"/> 작성
+
+[[라이브러리 다운]]
+< DB를 연결하기 위한 라이브러리(어떤 user가 어떤 비밀번호로 최대 몇 명까지 접속을 허락하는지 설정하는 것) >
+http://mvnrepository.com/ -> dbcp로 검색 -> commons DBCP -> 1.4 -> Maven -> <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp --> 
+									<dependency>
+    									<groupId>commons-dbcp</groupId>
+    									<artifactId>commons-dbcp</artifactId>
+    									<version>1.4</version>
+									</dependency> 복사
+
+ -> pom.xml(라이브러리 관리) -> Test <dependency> 밑에다가 붙여넣기
+
+
+<myBatis사용을 위한 라이브러리 다운>
+http://mvnrepository.com/ -> mybatis로 검색 -> MyBatis 클릭 -> 3.4.5  -> <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+									<dependency>
+    									<groupId>org.mybatis</groupId>
+    									<artifactId>mybatis</artifactId>
+    									<version>3.4.5</version>
+									</dependency> 복사
+ -> pom.xml(라이브러리 관리) -> dbcp <dependency> 밑에다가 붙여넣기
+
+<다운받은 mybatis를 spring에서 사용 가능하게 하는 라이브러리 다운> 
+					MyBatis Spring 클릭 -> 1.3.1  -> <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+									      <dependency>
+    									      <groupId>org.mybatis</groupId>
+    									      <artifactId>mybatis-spring</artifactId>
+   									      <version>1.3.1</version>
+									      </dependency> 복사
+
+ -> pom.xml(라이브러리 관리) -> mybatis <dependency> 밑에다가 붙여넣기
+
+
+				spring-jdbc 검색 -> Spring JDBC 클릭 -> 3.2.2  -> <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+										   <dependency>
+    										   <groupId>org.springframework</groupId>
+    										   <artifactId>spring-jdbc</artifactId>
+    										   <version>3.2.2.RELEASE</version>
+										    </dependency> 복사
+
+-> pom.xml(라이브러리 관리) -> mybatis-spring <dependency> 밑에다가 붙여넣기
+
+[pom.xml을 복사하여 사용할 시]
+overview 클릭 -> Group Id , Artifact Id(설정했던 패키지 이름으로 변경) -> project Name(내가 만들었던 프로젝트 이름으로 변경) -> ctrl + s
+
+
+[DB연결이 되지 않을 때]
+DBoracle 11g에서
+sqlplus "/as sysdba" -> alter user test account unlock
+
+
+
+
+
+
+
+
